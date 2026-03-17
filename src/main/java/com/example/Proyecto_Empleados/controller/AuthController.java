@@ -19,13 +19,14 @@ public class AuthController {
     public String login(){
         return "login";
     }
-
+// Mostrar formulario de registro
     @GetMapping("/registro")
     public String registro(Model model){
         model.addAttribute("usuario", new Usuario());
         return "registro";
     }
 
+    // Guardar nuevo usuario con rol EMPLEADO por defecto
     @PostMapping("/registro")
     public String guardarUsuario(@ModelAttribute Usuario usuario){
 

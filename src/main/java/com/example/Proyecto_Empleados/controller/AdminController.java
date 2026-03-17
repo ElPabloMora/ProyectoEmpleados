@@ -61,7 +61,7 @@ public class AdminController {
 }
 
 
-
+// Eliminar usuario
     @GetMapping("/eliminar/{id}")
     public String eliminarUsuario(@PathVariable Long id){
 

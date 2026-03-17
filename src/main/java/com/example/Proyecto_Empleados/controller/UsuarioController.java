@@ -33,7 +33,8 @@ public String actualizarDatos(@ModelAttribute Usuario usuarioForm, @Authenticati
     usuario.setNombre(usuarioForm.getNombre());
     usuario.setEmail(usuarioForm.getEmail());
 
-    // Solo actualizar la contraseña si el campo no está vacío
+    // Solo actualizar la contraseña si el campo no está vacío.
+    // Esto permite que el usuario deje el campo de contraseña vacío si no desea cambiarla.
     if (usuarioForm.getPassword() != null && !usuarioForm.getPassword().isEmpty()) {
         usuario.setPassword(usuarioForm.getPassword());
     }

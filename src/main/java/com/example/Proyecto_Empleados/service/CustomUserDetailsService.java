@@ -16,14 +16,14 @@ public class CustomUserDetailsService implements UserDetailsService {
     private UsuarioRepository usuarioRepository;
 
     @Override
-public UserDetails loadUserByUsername(String cedula) throws UsernameNotFoundException {
-    Usuario usuario = usuarioRepository.findByCedula(cedula)
-        .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado con cédula: " + cedula));
+    public UserDetails loadUserByUsername(String cedula) throws UsernameNotFoundException {
+        Usuario usuario = usuarioRepository.findByCedula(cedula)
+            .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado con cédula: " + cedula));
 
-    return org.springframework.security.core.userdetails.User.builder()
-            .username(usuario.getCedula())
-            .password("{noop}" + usuario.getPassword()) // para pruebas sin encriptar
-            .authorities(usuario.getRol().getAuthorities())
-            .build();
-}
+        return org.springframework.security.core.userdetails.User.builder()
+                .username(usuario.getCedula())
+                .password(usuario.getPassword()) 
+                .authorities(usuario.getRol().getAuthorities())
+                .build();
+    }
 }
