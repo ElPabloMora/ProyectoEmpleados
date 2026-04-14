@@ -21,12 +21,26 @@ public class AdminController {
     }
 // Lista todos los empleados
     @GetMapping("/usuarios")
-    public String listarUsuarios(Model model){
+public String listarUsuarios(Model model) {
+    model.addAttribute("usuarios", usuarioService.listarUsuarios());
+    model.addAttribute("nuevoUsuario", new Usuario()); // ✅ Para el formulario
+    return "admin/usuarios";
+}
 
-        model.addAttribute("usuarios", usuarioService.listarUsuarios());
-
-        return "admin/usuarios";
+    @GetMapping("/usuarios/nuevo")
+    public String nuevoUsuario(Model model) {
+        model.addAttribute("usuario", new Usuario());
+        return "admin/nuevoUsuario";
     }
+
+
+    // ✅ Guardar nuevo usuario
+    @PostMapping("/usuarios/nuevo")
+    public String crearUsuario(@ModelAttribute Usuario usuario) {
+        usuarioService.guardar(usuario);
+        return "redirect:/admin/usuarios";
+    }
+
 
     // Formulario para editar usuario
     @GetMapping("/usuarios/editar/{id}")

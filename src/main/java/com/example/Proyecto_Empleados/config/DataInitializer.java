@@ -22,8 +22,8 @@ public class DataInitializer {
                 admin.setPassword("1234");
                 admin.setRol(Rol.ADMIN);
 
-                usuarioService.guardar(admin); // ✅ Usa el service, no el repo directo
-            }
+                usuarioService.guardar(admin); 
         };
-    }
+    };
+}
 }

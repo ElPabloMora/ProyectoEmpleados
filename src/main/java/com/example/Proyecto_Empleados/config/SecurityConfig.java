@@ -24,9 +24,10 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         .csrf(csrf -> csrf.disable())
         .headers(headers -> headers.frameOptions(frame -> frame.disable()))
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/login","/registro","/h2-console/**").permitAll()
 .requestMatchers("/admin/**").hasRole("ADMIN")
 .requestMatchers("/usuario/**").hasRole("EMPLEADO")
+.requestMatchers("/admin/horarios/**").hasRole("ADMIN")
+.requestMatchers("/usuario/horarios", "/usuario/entrada", "/usuario/salida").hasRole("EMPLEADO")
 .anyRequest().authenticated()
         )
         .formLogin(login -> login

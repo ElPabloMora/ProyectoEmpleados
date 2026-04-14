@@ -7,12 +7,45 @@
 <body class="bg-light">
 
 <div class="container mt-4">
-    <!-- Barra superior con título y botón de logout -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>Lista de Usuarios</h2>
+        <a href="/admin/horarios" class="btn btn-info me-2">Ver Horarios</a>
         <a th:href="@{/logout}" class="btn btn-secondary">Cerrar sesión</a>
     </div>
 
+    <!-- ✅ Formulario para crear usuario -->
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Nuevo Usuario</h5>
+            <form th:action="@{/admin/usuarios/nuevo}" th:object="${nuevoUsuario}" method="post">
+                <div class="row g-2">
+                    <div class="col-md-2">
+                        <input type="text" th:field="*{cedula}" class="form-control" placeholder="Cédula" required>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" th:field="*{nombre}" class="form-control" placeholder="Nombre" required>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="email" th:field="*{email}" class="form-control" placeholder="Email" required>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="password" th:field="*{password}" class="form-control" placeholder="Contraseña" required>
+                    </div>
+                    <div class="col-md-2">
+                        <select th:field="*{rol}" class="form-select">
+                            <option th:each="r : ${T(com.example.Proyecto_Empleados.model.Rol).values()}"
+                                    th:value="${r.name()}" th:text="${r.name()}"></option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary w-100">Agregar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tabla de usuarios -->
     <table class="table table-striped table-bordered shadow-sm bg-white">
         <thead class="table-dark">
             <tr>
